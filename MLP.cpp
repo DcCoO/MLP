@@ -47,10 +47,6 @@ struct No{
         index = myIndex;
     }
 
-    void setOutputVal(double val){valor = val;}
-
-    double getOutputVal() const{return valor;}
-
     void calcOutputGradients(double targetVal){
         double delta = targetVal - valor;
         m_gradient = delta * No::derivadaAtivacao(valor);
@@ -134,7 +130,7 @@ struct MLP{
         erro = 0.0;
 
         for(uint i = 0, len = i < outputLayer.size() - 1; i < len; i++){
-            double delta = target[i] - outputLayer[i].getOutputVal();
+            double delta = target[i] - outputLayer[i].valor;
             erro += delta * delta;
         }
 
@@ -182,7 +178,7 @@ MLP mlp;
 
 void trainMLP(string inputFile, string targetFile){
     ///define topologia da MLP
-    vector<uint> topology = {2, hiddenSize(2), 1};
+    vector<uint> topology = {1, hiddenSize(2), 1};
     mlp = MLP(topology);
 
     ///le arquivos
@@ -251,5 +247,5 @@ void testMLP(string testFile){
 int main(){
     srand(time(NULL));
     trainMLP("input.txt", "output.txt");
-    testMLP("input.txt");
+    testMLP("test.txt");
 }
