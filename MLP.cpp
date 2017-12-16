@@ -5,7 +5,7 @@ using namespace std;
 #define db if(0) cout
 typedef unsigned int uint;
 
-vector<double> &getInput(const string &input){
+vector<double> getInput(const string &input){
     istringstream line(input);
     vector<double> v;
     double d;
